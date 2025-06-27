@@ -1,4 +1,5 @@
 import { ElementType } from "react";
+import Modal from "../Modal/Modal";
 
 type FormInputTextProps = Omit<
   React.HTMLAttributes<HTMLDivElement>,
@@ -33,13 +34,14 @@ export default function FormInputText({
        
         }
       >
-        {Icon && <Icon className="text-gray-700 dark:text-gray-400" />}
+        {Icon && <Icon className="text-gray-700 dark:text-gray-700" />}
         <input
           type={props.type || "text"}
           id={inputId && inputId}
-          className="flex w-full py-2 text-xl text-gray-600 outline-0 placeholder:text-xl placeholder:text-gray-600/50 dark:text-gray-100 dark:placeholder:text-gray-500"
+          className="flex w-full py-2 text-xl text-gray-600 outline-0 placeholder:text-xl placeholder:text-gray-600/50 dark:text-gray-700 dark:placeholder:text-gray-500"
           {...props}
         />
+        
       </div>
     </div>
   );

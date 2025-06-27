@@ -9,10 +9,13 @@ import { PostColaboradorResult } from "@/type/Colaborador/colaboradorType";
 
 
 export default async function postColaborador(
+   state:
+    | { errors: string[]; msg_success: string; success: boolean }
+    | undefined,
   formData: FormData
 ): Promise<PostColaboradorResult> {
   try {
-   
+
     const nome = formData.get("nome")?.toString().trim();
     const dataNascimentoRaw = formData.get("dataNasc")?.toString().trim();
 

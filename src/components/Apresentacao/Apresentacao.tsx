@@ -1,21 +1,26 @@
 "use client";
-import { useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { meses } from "./uilitsDados/utilitsdados";
 import { ColaboradoresProps } from "@/type/Colaborador/colaboradorType";
 import ContainerCard from "../ContainerCard/ContainerCard";
 import Card from "../Card/Card";
+import Modal from "../Modal/Modal";
+import LoginModal from "../Modal/Modal";
+
 
 type ApresentacaoProps = {
   colaboradores: ColaboradoresProps[];
+  validacao:boolean;
 };
 export default function Apresentacao({
+  validacao,
   colaboradores,
 }: ApresentacaoProps) {
   const [mesSelecionado, setMesSelecionado] = useState<string>(
     meses[new Date().getMonth()]
   );
 
-
+   const [modal,setModal]=useState<boolean>(false)
   const monthIndex = meses.indexOf(mesSelecionado);
 
   const aniversariantes = useMemo(
@@ -54,7 +59,7 @@ export default function Apresentacao({
     setMesSelecionado(e.target.value)
   }
   return (
-    <section>
+    <section className="relative">
       <header
         className="shadow-md text-white"
         style={{
@@ -75,6 +80,8 @@ export default function Apresentacao({
           </p>
         )}
         </div>
+        <div className="flex gap-5">
+
         <select
           className="text-black bg-white"
           value={mesSelecionado}
@@ -92,6 +99,8 @@ export default function Apresentacao({
             </option>
           ))}
         </select>
+        <button className="cursor-pointer active:scale-101 border p-2 rounded-[15px]" onClick={()=>{setModal(!modal)}}>Login</button>
+          </div>
       </header>
 
       <main>
@@ -124,6 +133,9 @@ export default function Apresentacao({
               }
             />
           </div>
+
+
+          
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {aniversariantes.map((colaborador) => {
               const aniversario = new Date(colaborador.dataNascimento);
@@ -141,6 +153,10 @@ export default function Apresentacao({
           </div>
         </div>
       </main>
+      {
+      modal&&
+      <Modal setModal={setModal}/>
+      }
     </section>
   );
 }

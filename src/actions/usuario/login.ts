@@ -1,6 +1,6 @@
 "use server";
 
-import bcrypt from "bcryptjs";                      // 1. importe o bcryptjs
+import bcrypt from "bcryptjs";                     
 import { gerarToken } from "@/lib/jwt";
 import prisma from "../../../prisma/prisma";
 import { Usuario } from "@prisma/client";
@@ -13,8 +13,8 @@ export async function loginUser(
     | undefined,
   formData: FormData
 ): Promise<{ errors: string[]; msg_success: string; success: boolean }> {
-  const email = formData.get("email")?.toString();
-  const senha = formData.get("senha")?.toString();
+  const email = formData.get("Email")?.toString();
+  const senha = formData.get("Senha")?.toString();
 
   if (!email || !senha) {
     return {
@@ -37,6 +37,8 @@ export async function loginUser(
       };
     }
     const senhaValida = await bcrypt.compare(senha, usuario.senha);
+  
+    
     if (!senhaValida) {
       return {
         errors: ["Senha incorreta."],
