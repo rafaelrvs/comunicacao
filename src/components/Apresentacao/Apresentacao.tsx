@@ -1,11 +1,11 @@
 "use client";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { meses } from "./uilitsDados/utilitsdados";
 import { ColaboradoresProps } from "@/type/Colaborador/colaboradorType";
 import ContainerCard from "../ContainerCard/ContainerCard";
 import Card from "../Card/Card";
 import Modal from "../Modal/Modal";
-import LoginModal from "../Modal/Modal";
+
 
 
 type ApresentacaoProps = {
@@ -58,6 +58,7 @@ export default function Apresentacao({
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setMesSelecionado(e.target.value)
   }
+  
   return (
     <section className="relative">
       <header
@@ -146,6 +147,7 @@ export default function Apresentacao({
                 .toUpperCase();
 
               return (
+              
                 <ContainerCard aniversario={aniversario} key={colaborador.uuid} initials={initials} colaborador={colaborador}/>
                   
               );
@@ -155,7 +157,7 @@ export default function Apresentacao({
       </main>
       {
       modal&&
-      <Modal setModal={setModal}/>
+      <Modal setModal={setModal} validacao={validacao} colaboradores={colaboradores}/>
       }
     </section>
   );

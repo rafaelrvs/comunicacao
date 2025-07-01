@@ -5,6 +5,7 @@ import path from "path";
 import prisma from "../../../prisma/prisma";
 import { Prisma } from "@prisma/client";
 import { PostColaboradorResult } from "@/type/Colaborador/colaboradorType";
+import { revalidateTag } from "next/cache";
 
 
 
@@ -21,7 +22,7 @@ export default async function postColaborador(
 
     const arquivo = formData.get("src") as File | null;
 
-    if (!nome || !dataNascimentoRaw || !arquivo || !(arquivo instanceof File)) {
+    if (!nome || !dataNascimentoRaw ) {
       return {
         errors: ["Por favor, preencha todos os campos e anexe uma imagem."],
         msg_success: "",
@@ -39,37 +40,44 @@ export default async function postColaborador(
       };
     }
 
-    const timestamp = Date.now();
-    const originalExt = path.extname(arquivo.name);                
-    const safeName = arquivo.name
-      .replace(/\s+/g, "-")
-      .replace(/[^a-zA-Z0-9\-.]/g, "")
-      .toLowerCase();                                              
-    const fileName = `${timestamp}-${safeName}`;
-
- 
-    const imageDir = path.join(process.cwd(), "public", "image");
-    const imagePath = path.join(imageDir, fileName);
-
-    await fs.mkdir(imageDir, { recursive: true });
-
-    const arrayBuffer = await arquivo.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
-    await fs.writeFile(imagePath, buffer);
-    const urlImg = `./image/${fileName}`;
-
-
-    const colaboradorData: Prisma.ColaboradorCreateInput = {
-      nome,
-      dataNascimento,
-      urlImg,
-    };
-    await prisma.colaborador.create({ data: colaboradorData });
-
-    return {
-      errors: [],
-      msg_success: "Cadastro realizado com sucesso!",
-      success: true,
+    let urlImg =""
+    if (arquivo) {
+      const timestamp = Date.now();
+      const originalExt = path.extname(arquivo.name);   
+      if(!arquivo.name){
+  
+        
+        const safeName = arquivo.name
+        .replace(/\s+/g, "-")
+        .replace(/[^a-zA-Z0-9\-.]/g, "")
+        .toLowerCase();                                              
+        const fileName = `${timestamp}-${safeName}`;
+        
+        
+        const imageDir = path.join(process.cwd(), "public", "image");
+        const imagePath = path.join(imageDir, fileName);
+        
+        await fs.mkdir(imageDir, { recursive: true });
+        
+        const arrayBuffer = await arquivo.arrayBuffer();
+        const buffer = Buffer.from(arrayBuffer);
+        await fs.writeFile(imagePath, buffer);
+        urlImg = `./image/${fileName}`;
+      }
+    }
+  
+  
+  const colaboradorData: Prisma.ColaboradorCreateInput = {
+    nome,
+    dataNascimento,
+    urlImg,
+  };
+  await prisma.colaborador.create({ data: colaboradorData });
+  revalidateTag("cadastroColab")
+  return {
+    errors: [],
+    msg_success: "Cadastro realizado com sucesso!",
+    success: true,
     };
   } catch (err: unknown) {
     console.error("Erro ao cadastrar colaborador:", err);

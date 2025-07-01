@@ -13,7 +13,6 @@ export async function verificaAuth(): Promise<boolean> {
   const cookieStore = await cookies();
   const token = cookieStore.get("token")?.value;
   if (!token) {
-    console.error("Sem token");
     return false;
   }
 
