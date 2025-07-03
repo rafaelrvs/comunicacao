@@ -64,11 +64,12 @@ export default function ModalCadastroColaborador({colaboradores,setModal,setEdit
             Voltar
           </p>
         </div>
-        <Form.PrimaryInput name="nome" placeholder="Nome do colaborador" />
+        <Form.PrimaryInput name="nome" placeholder="Nome do colaborador" required />
         <Form.PrimaryInput
           name="dataNasc"
           placeholder="Data de Anivesario"
           type="date"
+          required
         />
         <Form.PrimaryInput name="src" type="File" />
         <Form.PrimaryButton
@@ -79,7 +80,7 @@ export default function ModalCadastroColaborador({colaboradores,setModal,setEdit
         />
       </Form.Root>
 
-      <div className=" overflow-y-auto h-80 overflow-x-hidden">
+      <div className="h-80  overflow-hidden  bg-white  p-5  rounded-[15px] ">
     <ModalListaColaborador setEditaColab={setEditaColab} colaboradores={colaboradores}/>
     
       </div>

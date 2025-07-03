@@ -5,7 +5,9 @@ export default async function getColaboradores() {
   try {
     const lista = await prisma.colaborador.findMany()
     return { error: false, colaboradores: lista }
-  } catch (e) {
+  } catch (error) {
+    console.log(error);
+    
     return { error: true, colaboradores: [] }
   }
 }

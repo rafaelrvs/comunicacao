@@ -1,6 +1,4 @@
 import { ElementType } from "react";
-import Modal from "../Modal/Modal";
-
 type FormInputTextProps = Omit<
   React.HTMLAttributes<HTMLDivElement>,
   "children"
@@ -9,6 +7,7 @@ type FormInputTextProps = Omit<
     icon?: ElementType;
     label?: string;
     inputId?: string;
+  
   };
 
 export default function FormInputText({

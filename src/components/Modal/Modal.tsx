@@ -16,6 +16,7 @@ export default function LoginModal({
   colaboradores,
 }: ModalProps) {
   const [editaColab, setEditaColab] = useState(false);
+console.log(editaColab);
 
   if (!validacao)
     return (

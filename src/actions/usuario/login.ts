@@ -3,7 +3,7 @@
 import bcrypt from "bcryptjs";                     
 import { gerarToken } from "@/lib/jwt";
 import prisma from "../../../prisma/prisma";
-import { Usuario } from "@prisma/client";
+
 import { cookies } from "next/headers";
 
 

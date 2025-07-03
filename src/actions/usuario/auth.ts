@@ -1,3 +1,4 @@
+"use server"
 import { verify } from "jsonwebtoken";
 import { cookies } from "next/headers";
 import prisma from "../../../prisma/prisma";
@@ -23,13 +24,15 @@ export async function verificaAuth(): Promise<boolean> {
 
   try {
     const payload = verify(token, secret) as TokenType;
-    const result = await prisma.usuario.findUnique({
+    await prisma.usuario.findUnique({
       where: { uuid: payload.uuid },
       select: { uuid: true },
     });
 
     return true;
   } catch (err) {
+    console.log(err);
+    
     return false;
   }
 }

@@ -22,9 +22,9 @@ export default async function postColaborador(
 
     const arquivo = formData.get("src") as File | null;
 
-    if (!nome || !dataNascimentoRaw ) {
+    if (!nome?.length || !dataNascimentoRaw ) {
       return {
-        errors: ["Por favor, preencha todos os campos e anexe uma imagem."],
+        errors: ["Por favor, preencha todos os campos obrigatorios"],
         msg_success: "",
         success: false,
       };
@@ -42,32 +42,30 @@ export default async function postColaborador(
 
     let urlImg =""
     if (arquivo) {
-      const timestamp = Date.now();
-      const originalExt = path.extname(arquivo.name);   
-      if(!arquivo.name){
-  
+       if (arquivo.name !=="undefined" && arquivo.size > 0) {
         
-        const safeName = arquivo.name
-        .replace(/\s+/g, "-")
-        .replace(/[^a-zA-Z0-9\-.]/g, "")
-        .toLowerCase();                                              
-        const fileName = `${timestamp}-${safeName}`;
+         
+         const timestamp = Date.now();   
+         const safeName = arquivo.name
+         .replace(/\s+/g, "-")
+         .replace(/[^a-zA-Z0-9\-.]/g, "")
+         .toLowerCase();                                              
+         const fileName = `${timestamp}-${safeName}`;
+    
+         const imageDir = path.join(process.cwd(), "public", "image");
+         const imagePath = path.join(imageDir, fileName);
+         
+         await fs.mkdir(imageDir, { recursive: true });
+         
+         const arrayBuffer = await arquivo.arrayBuffer();
+         const buffer = Buffer.from(arrayBuffer);
+         await fs.writeFile(imagePath, buffer);
+         urlImg = `./image/${fileName}`;
+        }
         
-        
-        const imageDir = path.join(process.cwd(), "public", "image");
-        const imagePath = path.join(imageDir, fileName);
-        
-        await fs.mkdir(imageDir, { recursive: true });
-        
-        const arrayBuffer = await arquivo.arrayBuffer();
-        const buffer = Buffer.from(arrayBuffer);
-        await fs.writeFile(imagePath, buffer);
-        urlImg = `./image/${fileName}`;
       }
-    }
-  
-  
-  const colaboradorData: Prisma.ColaboradorCreateInput = {
+        
+        const colaboradorData: Prisma.ColaboradorCreateInput = {
     nome,
     dataNascimento,
     urlImg,

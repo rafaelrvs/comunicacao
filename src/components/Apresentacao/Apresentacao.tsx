@@ -1,10 +1,11 @@
 "use client";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { meses } from "./uilitsDados/utilitsdados";
 import { ColaboradoresProps } from "@/type/Colaborador/colaboradorType";
 import ContainerCard from "../ContainerCard/ContainerCard";
 import Card from "../Card/Card";
 import Modal from "../Modal/Modal";
+import Apresentar from "../Apresentar/Apresentar";
 
 
 
@@ -19,7 +20,7 @@ export default function Apresentacao({
   const [mesSelecionado, setMesSelecionado] = useState<string>(
     meses[new Date().getMonth()]
   );
-
+const [ativaSlide, setAtivaSlide] = useState<boolean>(false)
    const [modal,setModal]=useState<boolean>(false)
   const monthIndex = meses.indexOf(mesSelecionado);
 
@@ -62,7 +63,7 @@ export default function Apresentacao({
   return (
     <section className="relative">
       <header
-        className="shadow-md text-white"
+        className="shadow-md text-white h-[10dvh]"
         style={{
           display: "flex",
           alignItems: "center",
@@ -84,7 +85,7 @@ export default function Apresentacao({
         <div className="flex gap-5">
 
         <select
-          className="text-black bg-white"
+          className="text-black bg-slate-200"
           value={mesSelecionado}
           onChange={handleChange}
           style={{
@@ -100,10 +101,17 @@ export default function Apresentacao({
             </option>
           ))}
         </select>
+        <button className="cursor-pointer active:scale-101 border p-2 rounded-[15px]" onClick={()=>{setAtivaSlide(!ativaSlide)}}>{ativaSlide?"Parar":"Apresentar"}</button>
         <button className="cursor-pointer active:scale-101 border p-2 rounded-[15px]" onClick={()=>{setModal(!modal)}}>Login</button>
           </div>
       </header>
+{ativaSlide?
 
+
+<Apresentar aniversariantes={aniversariantes}/>
+
+
+:
       <main>
         <div>
           <div className="bg-white rounded-lg shadow p-6 flex flex-col sm:flex-row gap-4">
@@ -125,12 +133,12 @@ export default function Apresentacao({
             <Card
               className="flex-1 bg-green-50 p-4 rounded relative hover:scale-101 duration-75 ease-in  text-green-600"
               title={" Próximo aniversariante"}
-              text={proximo.nome}
+              text={proximo?.nome}
               styleH2={"text-green-900 text-[1.3rem]"}
               numero={
-                proximo.daysUntil > 1
-                  ? `(em ${proximo.daysUntil} dias)`
-                  : `(em ${proximo.daysUntil} dia)`
+                proximo?.daysUntil > 1
+                  ? `(em ${proximo?.daysUntil} dias)`
+                  : `(em ${proximo?.daysUntil} dia)`
               }
             />
           </div>
@@ -148,16 +156,19 @@ export default function Apresentacao({
 
               return (
               
-                <ContainerCard aniversario={aniversario} key={colaborador.uuid} initials={initials} colaborador={colaborador}/>
+                <ContainerCard aniversario={aniversario} key={colaborador.uuid} initials={initials} colaborador={colaborador} />
                   
               );
             })}
           </div>
         </div>
       </main>
+      }
       {
       modal&&
-      <Modal setModal={setModal} validacao={validacao} colaboradores={colaboradores}/>
+        <Modal setModal={setModal} validacao={validacao} colaboradores={colaboradores}/>
+
+
       }
     </section>
   );
