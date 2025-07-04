@@ -20,13 +20,12 @@ export default function ContainerCard({
   return (
     <div className="bg-white rounded-lg shadow overflow-hidden hover:scale-101 duration-500 ease-in-out w-100"  {...props} >
       {colaborador.urlImg ? (
-        <div className=" relative size-100 overflow-hidden flex ">
-
+        <div className=" relative size-100 overflow-hidden flex items-start ">
      <img
             src={colaborador.urlImg}
             alt={colaborador.nome}
           
-            className="object-cover"
+            className="object-cover w-full"
 
           />
           </div>

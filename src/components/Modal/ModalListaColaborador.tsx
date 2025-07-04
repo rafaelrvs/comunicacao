@@ -55,7 +55,7 @@ export default function ModalListaColaborador({
           key={colaborador.uuid}
         >
           <div className="flex" key={colaborador.uuid}>
-            <div className="relative  size-32 p-10 overflow-hidden flex items-start mr-2 ">
+            <div className="relative  size-32 p-10 overflow-hidden flex items-start mr-2  ">
               {colaborador.urlImg ? (
                 <img
                   src={colaborador.urlImg}
