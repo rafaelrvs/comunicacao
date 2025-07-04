@@ -1,5 +1,5 @@
 import { ColaboradoresProps } from "@/type/Colaborador/colaboradorType";
-import Image from "next/image";
+
 
 
 export type ContainerCardProps = React.ComponentProps<"div"> & {
@@ -22,12 +22,12 @@ export default function ContainerCard({
       {colaborador.urlImg ? (
         <div className=" relative size-100 overflow-hidden flex ">
 
-     <Image
+     <img
             src={colaborador.urlImg}
             alt={colaborador.nome}
-            fill
+          
             className="object-cover"
-            priority={false}
+
           />
           </div>
       ) : (

@@ -5,7 +5,7 @@ import React, { SetStateAction, useState } from "react";
 import EditaColaborador from "../EditaColaborador/EditaColaborador";
 import deleteColaborador from "@/actions/Colaborador/deletacolaborador";
 import { toast } from "react-toastify";
-import Image from "next/image";
+
 type PropsModalLista = {
   colaboradores: ColaboradoresProps[];
   setEditaColab: React.Dispatch<SetStateAction<boolean>>;
@@ -55,14 +55,11 @@ export default function ModalListaColaborador({
           key={colaborador.uuid}
         >
           <div className="flex" key={colaborador.uuid}>
-            <div className="relative w-full size-32 p-10 overflow-hidden flex items-start mr-2 ">
+            <div className="relative  size-32 p-10 overflow-hidden flex items-start mr-2 ">
               {colaborador.urlImg ? (
-                <Image
+                <img
                   src={colaborador.urlImg}
                   alt={colaborador.nome}
-                   fill
-           
-            priority={false}
                   className="rounded-[15px] object-cover"
                 />
               ) : (

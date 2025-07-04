@@ -69,7 +69,7 @@ export default function ModalLogin({setModal}:PropsLogin){
             id="Senha"
             placeholder="Digite seu email"
             required
-            className="text-gray-700"
+            className="text-gray-700 p-5"
           />
           <Form.PrimaryButton
             disabled={isPending}
