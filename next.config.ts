@@ -1,13 +1,19 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
+// .eslintrc.js
+module.exports = {
+  root: true,
+  extends: [
+    "next",
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended"
+  ],
   rules: {
-    // desliga o aviso sobre <img>
-    '@next/next/no-img-element': 'off',
-    // opcional: também silencia import não usado, se quiser
-    // '@typescript-eslint/no-unused-vars': ['warn', { 'varsIgnorePattern': '^Image$' }]
-  },
-};
+    // agora sim, silencia o aviso de usar <img> em vez de <Image>
+    "@next/next/no-img-element": "off",
 
-export default nextConfig;
+    // opcional: silencia import não usado para a variável Image
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      { "varsIgnorePattern": "^Image$" }
+    ]
+  }
+};
