@@ -58,7 +58,7 @@ export default function EditaColaborador({
   return (
     <Form.Root
       action={formAction}
-      className="flex flex-col flex-1 gap-2 p-5"
+      className="flex flex-col flex-1 gap-2 p-5 text-black"
     >
       {/* precisa do uuid para identificar quem editar */}
       <input type="hidden" name="uuid" value={formEdit.uuid} />
@@ -74,7 +74,7 @@ export default function EditaColaborador({
         type="date"
         value={formEdit.data}
         onChange={handleChangeEdit}
-        className="flex"
+        className="flex p-2  text-black"
       />
 
 

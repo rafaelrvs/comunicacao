@@ -36,18 +36,13 @@ export default function ModalCadastroColaborador({colaboradores,setModal,setEdit
         }
       }, [errors, msg_success]);
     
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  const data = new FormData(e.currentTarget as HTMLFormElement);
-  formDataCadastro(data);
-  };
 
       return (
     <div className="flex w-full justify-around bg-black/70 h-full fixed items-center top-0 left-0 ">
         
       <Form.Root
         
-         onSubmit={handleSubmit}
+        action={formDataCadastro}
         className="bg-white p-5 shadow shado-md rounded-[15px]  text-gray-700 gap-2 flex flex-col
       "
       >
