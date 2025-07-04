@@ -88,7 +88,7 @@ export default async function putColaborador(
          const arrayBuffer = await arquivo.arrayBuffer();
          const buffer = Buffer.from(arrayBuffer);
          await fs.writeFile(imagePath, buffer);
-         urlImg = `./image/${fileName}`;
+         urlImg = `/image/${fileName}`;
         }
         
       }
