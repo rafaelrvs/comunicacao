@@ -23,8 +23,8 @@ export default function ModalCadastroColaborador({colaboradores,setModal,setEdit
       success: false,
     });
   
+    const { errors, msg_success } = stateCadastro;
      useEffect(() => {
-        const { errors, msg_success } = stateCadastro;
     
         if (Array.isArray(errors) && errors.length > 0) {
           errors.forEach((err) => toast.error(err));
@@ -34,7 +34,7 @@ export default function ModalCadastroColaborador({colaboradores,setModal,setEdit
         if (msg_success) {
           toast.success(msg_success);
         }
-      }, [stateCadastro.errors, stateCadastro.msg_success]);
+      }, [errors, msg_success]);
     
 
       return (

@@ -1,4 +1,5 @@
 import { ColaboradoresProps } from "@/type/Colaborador/colaboradorType";
+import Image from "next/image";
 
 
 export type ContainerCardProps = React.ComponentProps<"div"> & {
@@ -12,23 +13,25 @@ export default function ContainerCard({
   aniversario,
   initials,
   colaborador,
-  className,
+  
   ...props
 }: ContainerCardProps) {
   console.log(colaborador.urlImg);
   return (
     <div className="bg-white rounded-lg shadow overflow-hidden hover:scale-101 duration-500 ease-in-out w-100"  {...props} >
       {colaborador.urlImg ? (
-        <div className="h-100 overflow-hidden flex items-start">
+        <div className=" relative size-100 overflow-hidden flex ">
 
-        <img
-          src={colaborador.urlImg}
-          alt={colaborador.nome}
-          className="w-full object-cover   h-100"
+     <Image
+            src={colaborador.urlImg}
+            alt={colaborador.nome}
+            fill
+            className="object-cover"
+            priority={false}
           />
           </div>
       ) : (
-        <div className="bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center h-100">
+        <div className=" bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center size-100">
           <span className="text-white text-3xl font-bold ">{initials}</span>
         </div>
       )}

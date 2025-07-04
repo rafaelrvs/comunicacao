@@ -14,7 +14,7 @@ export default function FormInputText({
   icon: Icon,
   inputId,
   label,
-  className,
+
   ...props
 }: FormInputTextProps) {
   return (

@@ -16,8 +16,8 @@ export default function ModalLogin({setModal}:PropsLogin){
     success: false,
   });
 
+  const { errors, msg_success } = state;
     useEffect(() => {
-      const { errors, msg_success } = state;
   
       if (Array.isArray(errors) && errors.length > 0) {
         errors.forEach((err) => toast.error(err));
@@ -27,7 +27,7 @@ export default function ModalLogin({setModal}:PropsLogin){
       if (msg_success) {
         toast.success(msg_success);
       }
-    }, [state.errors, state.msg_success]);
+    }, [errors, msg_success]);
     return(
 
            <div className="flex w-full justify-center bg-black/70 h-full fixed items-center top-0 left-0 ">

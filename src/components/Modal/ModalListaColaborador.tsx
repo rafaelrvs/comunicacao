@@ -1,9 +1,11 @@
+"use client"
 import { ColaboradoresProps } from "@/type/Colaborador/colaboradorType";
 import { Pencil, Trash2 } from "lucide-react";
 import React, { SetStateAction, useState } from "react";
 import EditaColaborador from "../EditaColaborador/EditaColaborador";
 import deleteColaborador from "@/actions/Colaborador/deletacolaborador";
 import { toast } from "react-toastify";
+import Image from "next/image";
 type PropsModalLista = {
   colaboradores: ColaboradoresProps[];
   setEditaColab: React.Dispatch<SetStateAction<boolean>>;
@@ -38,7 +40,7 @@ export default function ModalListaColaborador({
   }
 
   return (
-    <div className=" overflow-y-auto h-80 overflow-x-hidden">
+    <div className=" overflow-y-auto h-80 overflow-x-hidden ">
       <input
         type="text"
         placeholder="Pesquisar por nome"
@@ -49,16 +51,19 @@ export default function ModalListaColaborador({
 
       {colaboradoresFiltrados.map((colaborador) => (
         <div
-          className="flex  bg-white mt-2 w-3xl rounded-[15px] overflow-hidden gap-2 relative  hover:"
+          className="flex  bg-white mt-2 shadow shadow-2xl  w-3xl rounded-[15px] overflow-hidden gap-2 relative hover:"
           key={colaborador.uuid}
         >
           <div className="flex" key={colaborador.uuid}>
-            <div className="size-15 items-center flex m-1">
+            <div className="relative w-full size-32 p-10 overflow-hidden flex items-start mr-2 ">
               {colaborador.urlImg ? (
-                <img
+                <Image
                   src={colaborador.urlImg}
                   alt={colaborador.nome}
-                  className="rounded-[15px]"
+                   fill
+           
+            priority={false}
+                  className="rounded-[15px] object-cover"
                 />
               ) : (
                 <p className=" justify-center flex items-center size-full ">
@@ -102,7 +107,7 @@ export default function ModalListaColaborador({
                  onClick={() => {
                    setEditandoUuid(null);
                    setEditandoUuid(colaborador.uuid);
-                   deletarColaborador(colaborador.uuid)
+                   deletarColaborador(colaborador.uuid);
                  }}
                >
                  Remover
@@ -110,7 +115,9 @@ export default function ModalListaColaborador({
                <button
                   type="submit"
                  className="p-2 w-24 bg-red-600 text-white rounded-md active:scale-102"
-                 onClick={() => {setEditandoUuid(null),setStatusDeleta(null)}}
+                 onClick={() => {setEditandoUuid(null); 
+                  setStatusDeleta(null);
+                }}
                >
                  Cancelar
                </button>
@@ -122,7 +129,7 @@ export default function ModalListaColaborador({
           <div
             className="p-2 bg-purple-600 text-white rounded-md cursor-pointer active:scale-102"
             onClick={() => {
-              setStatusDeleta(null)
+              setStatusDeleta(null);
               setEditandoUuid(colaborador.uuid);
               setFormEdit({
                 uuid: colaborador.uuid,
@@ -137,7 +144,7 @@ export default function ModalListaColaborador({
           <button
              
             className="p-2 bg-red-600 text-white rounded-md active:scale-102"
-            onClick={() =>{setEditandoUuid(null) ,setStatusDeleta(colaborador.uuid)}}
+            onClick={() =>{setEditandoUuid(null); setStatusDeleta(colaborador.uuid);}}
           >
             <Trash2 />
           </button>

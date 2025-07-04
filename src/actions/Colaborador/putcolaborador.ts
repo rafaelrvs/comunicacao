@@ -73,7 +73,7 @@ export default async function putColaborador(
         
          
          const timestamp = Date.now();
-         const originalExt = path.extname(arquivo.name);   
+      
          const safeName = arquivo.name
          .replace(/\s+/g, "-")
          .replace(/[^a-zA-Z0-9\-.]/g, "")
