@@ -59,7 +59,7 @@ export default function ModalListaColaborador({
             <div className="relative  size-32 p-10 overflow-hidden flex items-start mr-2  ">
               {colaborador.urlImg ? (
                 <Image
-                  width={"100"}
+                width={"150"}
                    height={"100"}
                    quality={100} 
                   src={colaborador.urlImg}

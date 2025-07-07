@@ -13,9 +13,9 @@ export default function Aniversariantes({
     <div>
       <div className="h-10">
         <Image
-          width={"100"}
+          width={"150"}
           height={"100"}
-            quality={100} 
+          quality={100}
           src={urlImagem}
           alt={nameImage}
           style={{ objectFit: "cover" }}

@@ -31,7 +31,7 @@ export default function ContainerCard({
       {colaborador.urlImg ? (
         <div className=" relative size-100 overflow-hidden flex items-start ">
           <Image
-            width={"100"}
+            width={"150"}
             height={"100"}
             quality={100}
             src={colaborador.urlImg}
