@@ -5,6 +5,7 @@ import React, { SetStateAction, useState } from "react";
 import EditaColaborador from "../EditaColaborador/EditaColaborador";
 import deleteColaborador from "@/actions/Colaborador/deletacolaborador";
 import { toast } from "react-toastify";
+import Image from "next/image";
 
 type PropsModalLista = {
   colaboradores: ColaboradoresProps[];
@@ -57,7 +58,7 @@ export default function ModalListaColaborador({
           <div className="flex" key={colaborador.uuid}>
             <div className="relative  size-32 p-10 overflow-hidden flex items-start mr-2  ">
               {colaborador.urlImg ? (
-                <img
+                <Image
                   src={colaborador.urlImg}
                   alt={colaborador.nome}
                   className="rounded-[15px] object-cover"

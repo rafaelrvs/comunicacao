@@ -14,7 +14,9 @@ setModal:React.Dispatch<SetStateAction<boolean>>
 setEditaColab:React.Dispatch<SetStateAction<boolean>>
 
 }
-export default function ModalCadastroColaborador({colaboradores,setModal,setEditaColab}:PropsColaboradorCadastro){
+export default function ModalCadastroColaborador({colaboradores,setEditaColab}:PropsColaboradorCadastro){
+
+
 
   const [stateCadastro, formDataCadastro, isPendingCadastro] =
     React.useActionState(postColaborador, {
@@ -54,15 +56,9 @@ export default function ModalCadastroColaborador({colaboradores,setModal,setEdit
              Cadastrar colaborador
             </strong>
           </h1>
-          <p
-            className="p-2 rounded-[15px] bg-red-500 text-[1rem] text-white cursor-pointer active:scale-101"
-            onClick={() => {
-              setModal(false)
-              logOff();
-            }}
-          >
-            Voltar
-          </p>
+
+          <p onClick={()=>{logOff()}} className="bg-red-400 text-white p-2 rounded-[15px] cursor-pointer">Voltar</p>
+          
         </div>
         <Form.PrimaryInput name="nome" placeholder="Nome do colaborador" required />
         <Form.PrimaryInput

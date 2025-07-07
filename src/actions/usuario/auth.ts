@@ -9,7 +9,6 @@ type TokenType = {
   iat: number;
   exp: number;
 };
-
 export async function verificaAuth(): Promise<boolean> {
   const cookieStore = await cookies();
   const token = cookieStore.get("token")?.value;

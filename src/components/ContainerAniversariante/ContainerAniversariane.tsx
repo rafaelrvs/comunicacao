@@ -1,3 +1,4 @@
+import Image from "next/image";
 
 export type AniversariantesProps = 
 {
@@ -9,7 +10,8 @@ export default function Aniversariantes({urlImagem,nameImage}: AniversariantesPr
   return (
     <div >
         <div className="h-10">
-         <img
+         <Image
+         width={"50"}
     src={urlImagem}
     alt={nameImage}
 

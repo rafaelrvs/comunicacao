@@ -1,10 +1,10 @@
 'use client';
-
 import React, { useState, useEffect, useMemo } from 'react';
 import { ColaboradoresProps } from '@/type/Colaborador/colaboradorType';
 import ContainerCard from '../ContainerCard/ContainerCard';
 import { AnimatePresence,motion } from 'motion/react';
 import Card from '../Card/Card';
+
 
 type PropsApresentacao = {
   aniversariantes: ColaboradoresProps[];
@@ -12,12 +12,15 @@ type PropsApresentacao = {
 
 export default function Apresentar({ aniversariantes }: PropsApresentacao) {
   const [startIndex, setStartIndex] = useState(0);
-
+const [animacao,setAnimacao] = useState(false)
   useEffect(() => {
+    //animacao balao
     if (aniversariantes.length <= 4) return;
-
+    
     const interval = setInterval(() => {
       setStartIndex(prev => (prev + 4) % aniversariantes.length);
+      
+      setAnimacao(!animacao)
     }, 5000); // troca a cada 5 segundos
 
     return () => clearInterval(interval);
@@ -57,7 +60,8 @@ export default function Apresentar({ aniversariantes }: PropsApresentacao) {
     <AnimatePresence mode='popLayout'>
         <div className='h-[90dvh]'>
 
-        <div className="bg-slate-200 rounded-lg shadow p-6 flex flex-col sm:flex-row gap-4 justify-center  mb-20">
+        <div className="bg-slate-200 rounded-lg shadow p-6 flex flex-col sm:flex-row gap-4 justify-center  mb-20 relative" >
+       
         <Card
             className="flex-1 bg-blue-50 p-4 rounded relative hover:scale-101 duration-75 ease-in  text-blue-600"
             title={" Aniversariantes este mês"}
@@ -91,10 +95,7 @@ export default function Apresentar({ aniversariantes }: PropsApresentacao) {
             .map(n => n[0])
             .join('')
             .toUpperCase();
-            
             return (
-                
-                
                 <motion.div
                     key={colaborador.uuid}
                     initial={{opacity:0, x:-20}}
