@@ -15,6 +15,7 @@ export default function Aniversariantes({
         <Image
           width={"100"}
           height={"100"}
+            quality={100} 
           src={urlImagem}
           alt={nameImage}
           style={{ objectFit: "cover" }}

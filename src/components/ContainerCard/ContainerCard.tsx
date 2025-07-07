@@ -21,9 +21,7 @@ export default function ContainerCard({
 
   const path = usePathname();
   useEffect(() => {
-
     console.log(path);
-    
   }, [path]);
   return (
     <div
@@ -35,6 +33,7 @@ export default function ContainerCard({
           <Image
             width={"100"}
             height={"100"}
+            quality={100}
             src={colaborador.urlImg}
             alt={colaborador.nome}
             className="object-cover w-full"
