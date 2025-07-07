@@ -28,7 +28,6 @@ export default function Apresentacao({
     [colaboradores, monthIndex]
   );
 
-
   const calcularDiasPara = (isoDate: string) => {
     const hoje = new Date();
     const niver = new Date(isoDate);

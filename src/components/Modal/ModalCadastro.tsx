@@ -57,7 +57,7 @@ export default function ModalCadastroColaborador({colaboradores,setEditaColab}:P
             </strong>
           </h1>
 
-          <p onClick={()=>{logOff()}} className="bg-red-400 text-white p-2 rounded-[15px] cursor-pointer">Voltar</p>
+          <p onClick={(e)=>{ e.preventDefault(); logOff()}} className="bg-red-400 text-white p-2 rounded-[15px] cursor-pointer">Voltar</p>
           
         </div>
         <Form.PrimaryInput name="nome" placeholder="Nome do colaborador" required />
