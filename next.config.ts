@@ -4,7 +4,7 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/images/:path*',
+        source: '/image/:path*',
         destination: 'http://10.0.2.5:3001/image/:path*',
       },
     ]
