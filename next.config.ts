@@ -6,7 +6,7 @@ const nextConfig = {
       {
         source: '/images/:path*',
         // troque para localhost:
-        destination: 'http://localhost:3001/image/:path*',
+      destination: 'http://10.0.2.5:3001/image/:path*',
       },
     ]
   },
