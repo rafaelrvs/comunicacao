@@ -9,12 +9,9 @@ import { revalidatePath } from "next/cache";
 type PutColaboradorResult = PostColaboradorResult;
 
 export default async function putColaborador(
+  _prev: PostColaboradorResult,
   formData: FormData
 ): Promise<PutColaboradorResult> {
-
-
-
-  
   try {
     const uuidRaw = formData.get("uuid")?.toString().trim();
     const nome = formData.get("nome")?.toString().trim();
@@ -59,40 +56,44 @@ export default async function putColaborador(
     const relativeImgPath = colaboradorExistente.urlImg.replace(/^\.?\//, "");
     const imagePathAniga = path.join(process.cwd(), "public", relativeImgPath);
     try {
-      await fs.unlink(imagePathAniga);
+      if (relativeImgPath) {
+        await fs.unlink(imagePathAniga);
+      }
     } catch (err) {
       console.warn(
         `⚠️ Não foi possível deletar a imagem em ${imagePathAniga}:`,
         err
       );
+      return {
+        errors: ["`⚠️ Não foi possível deletar a imagem "],
+        msg_success: "",
+        success: false,
+      };
     }
 
- let urlImg =""
+    let urlImg = "";
     if (arquivo) {
-       if (arquivo.name !=="undefined" && arquivo.size > 0) {
-        
-         
-         const timestamp = Date.now();
-      
-         const safeName = arquivo.name
-         .replace(/\s+/g, "-")
-         .replace(/[^a-zA-Z0-9\-.]/g, "")
-         .toLowerCase();                                              
-         const fileName = `${timestamp}-${safeName}`;
-    
-         const imageDir = path.join(process.cwd(), "public", "image");
-         const imagePath = path.join(imageDir, fileName);
-         
-         await fs.mkdir(imageDir, { recursive: true });
-         
-         const arrayBuffer = await arquivo.arrayBuffer();
-         const buffer = Buffer.from(arrayBuffer);
-         await fs.writeFile(imagePath, buffer);
-         urlImg = `/image/${fileName}`;
-        }
-        
+      if (arquivo.name !== "undefined" && arquivo.size > 0) {
+        const timestamp = Date.now();
+
+        const safeName = arquivo.name
+          .replace(/\s+/g, "-")
+          .replace(/[^a-zA-Z0-9\-.]/g, "")
+          .toLowerCase();
+        const fileName = `${timestamp}-${safeName}`;
+
+        const imageDir = path.join(process.cwd(), "public", "image");
+        const imagePath = path.join(imageDir, fileName);
+
+        await fs.mkdir(imageDir, { recursive: true });
+
+        const arrayBuffer = await arquivo.arrayBuffer();
+        const buffer = Buffer.from(arrayBuffer);
+        await fs.writeFile(imagePath, buffer);
+        urlImg = `/image/${fileName}`;
       }
-      
+    }
+
     const updateData: Prisma.ColaboradorUpdateInput = {
       nome,
       dataNascimento,

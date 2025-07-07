@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import { Form } from "../Form";
 import React, { Dispatch, SetStateAction, useActionState, useEffect } from "react";
 import putColaborador from "@/actions/Colaborador/putcolaborador";
-import { PostColaboradorResult } from "@/type/Colaborador/colaboradorType";
 
 // 1) Interface do estado do form
 export interface FormEdit {
@@ -27,13 +26,8 @@ export default function EditaColaborador({
   setEditandoUuid,
 
 }: PropsEditColaborador) {
-  const actionAdapter = async (
-    _prev: PostColaboradorResult,
-    formData: FormData
-  ): Promise<PostColaboradorResult> => {
-    return putColaborador(formData);
-  };
-  const [stateEdita, formAction] = useActionState(actionAdapter, {
+
+  const [stateEdita, formAction] = useActionState(putColaborador, {
     errors: [],
     msg_success: "",
     success: false,
