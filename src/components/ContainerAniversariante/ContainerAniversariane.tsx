@@ -1,23 +1,25 @@
 import Image from "next/image";
 
-export type AniversariantesProps = 
-{
-urlImagem:string;
-nameImage:string
+export type AniversariantesProps = {
+  urlImagem: string;
+  nameImage: string;
 };
 
-export default function Aniversariantes({urlImagem,nameImage}: AniversariantesProps) {
+export default function Aniversariantes({
+  urlImagem,
+  nameImage,
+}: AniversariantesProps) {
   return (
-    <div >
-        <div className="h-10">
-         <Image
-         width={"50"}
-    src={urlImagem}
-    alt={nameImage}
-
-    style={{ objectFit: "cover" }}
-  />
-        </div>
+    <div>
+      <div className="h-10">
+        <Image
+          width={"100"}
+          height={"100"}
+          src={urlImagem}
+          alt={nameImage}
+          style={{ objectFit: "cover" }}
+        />
+      </div>
       <h1>Aniversariantes</h1>
       <p>Setor</p>
       <p>dia</p>

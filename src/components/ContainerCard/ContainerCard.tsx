@@ -46,10 +46,10 @@ export default function ContainerCard({
         </div>
       )}
       <div className="p-4 ">
-        <h1 className="text-lg font-semibold text-gray-800 ">
+        <h1 className="text-2xl font-semibold text-gray-800 ">
           {colaborador.nome}
         </h1>
-        <p className="text-sm text-gray-600">
+        <p className="text-2xl text-gray-600 ">
           <span className="mr-1">🎂 Dia</span>
           {aniversario.toLocaleDateString("pt-BR", {
             day: "2-digit",
